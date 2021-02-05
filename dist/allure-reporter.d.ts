@@ -1,0 +1,52 @@
+/// <reference types="node" />
+import { AllureGroup, AllureRuntime, AllureStep, AllureTest, Category, ExecutableItemWrapper } from 'allure-js-commons';
+import JestAllureInterface from './jest-allure-interface';
+import type { ContentType } from './types';
+import type * as jest from '@jest/types';
+export default class AllureReporter {
+    currentExecutable: ExecutableItemWrapper | null;
+    private readonly allureRuntime;
+    private readonly suites;
+    private readonly steps;
+    private readonly tests;
+    private readonly jiraUrl;
+    private readonly tmsUrl;
+    private readonly categories;
+    constructor(options: {
+        allureRuntime: AllureRuntime;
+        jiraUrl?: string;
+        tmsUrl?: string;
+        environmentInfo?: Record<string, string>;
+        categories?: Category[];
+    });
+    getImplementation(): JestAllureInterface;
+    get currentSuite(): AllureGroup | null;
+    get currentStep(): AllureStep | null;
+    get currentTest(): AllureTest | null;
+    environmentInfo(info?: Record<string, string>): void;
+    startTestFile(suiteName?: string): void;
+    endTestFile(): void;
+    startSuite(suiteName?: string): void;
+    endSuite(): void;
+    startHook(type: jest.Circus.HookType): void;
+    endHook(error?: Error): void;
+    startTestCase(test: jest.Circus.TestEntry, state: jest.Circus.State, testPath: string): void;
+    passTestCase(): void;
+    pendingTestCase(test: jest.Circus.TestEntry): void;
+    failTestCase(error: Error | any): void;
+    endTest(): void;
+    writeAttachment(content: Buffer | string, type: ContentType): string;
+    pushStep(step: AllureStep): void;
+    popStep(): void;
+    pushTest(test: AllureTest): void;
+    popTest(): void;
+    pushSuite(suite: AllureGroup): void;
+    popSuite(): void;
+    private handleError;
+    private extractCodeDetails;
+    private extractDocBlock;
+    private setAllureReportPragmas;
+    private setAllureLabelsAndLinks;
+    private addSuiteLabelsToTestCase;
+    private collectTestParentNames;
+}
