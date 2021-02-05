@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "lib": ["es2019", "dom"],
+    "target": "es2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "declaration": true,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "importsNotUsedAsValues": "error",
+    "esModuleInterop": false,
+    "noImplicitReturns": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": ["node", "jest", "allure-js-commons", "lodash"],
+    "outDir": "dist/"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["**/__tests__/**"],
+  "compileOnSave": true
+}
